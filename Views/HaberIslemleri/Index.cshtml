@@ -1,0 +1,43 @@
+@model IEnumerable<TeknolojiHaber.Models.Haber>
+
+
+@{
+    ViewData["Title"] = "Anasayfa";
+}
+<h1 class="text-success">Haberler</h1>
+@{ var kategori =ViewBag.Kategori as Kategori;}
+<h6 class="text-danger">@(kategori?.KategoriAdi??"Tüm Haberler")</h6>
+
+@if (User.IsInRole("Admin")||User.IsInRole("Editor"))
+{
+ <p>
+    <a class="d-inline p-1 bg-primary text-white" asp-action="Create" asp-route-id="@kategori?.Id">Yeni Haber Kaydı</a>
+ </p>  
+}
+
+<div class="card-columns row m-t-md">@foreach (var item in Model)
+ { 
+  <div class="card col-xs-2 col-md-3 cardbody card-align">
+    @if (item.Resimler.FirstOrDefault()==null)
+    {
+        <img src="\resimler\resimyok.jpg" class="img-fluid" style="height: 175px; widht: 150px; margin-top: 25px; center " alt="" />
+    }
+    else
+    {
+    <img class="img-fluid img-zoom" src="\resimler\@item.Resimler.FirstOrDefault().DosyaAdi"  style="height: 175px; widht: 150px; margin-top: 25px; center " alt="" />
+    }
+    <div class="card-body cardbody-zoom2">
+      <h5 class="card-title">@item.HaberBaslik</h5>
+      <p class="title">@item.HaberTarih.ToString(string.Format("dd/MM/yyyy"))</p>
+      <p class="card-text">Haber Detayı için Detayları'na Tıklayınız.</p>
+      @if (User.IsInRole("Admin")||User.IsInRole("Editor"))
+                {
+                  <p><a class="fas fa-edit d-inline p-2 bg-success text-white" asp-action="Edit" asp-route-id="@item.Id"> Düzenle</a></p> 
+                  <p><a class="fas fa-trash-alt d-inline p-2 bg-danger text-white" asp-action="Delete" asp-route-id="@item.Id"> Sil</a>  </p> 
+                }
+      <p><a class="fas fa-info-circle d-inline p-2 bg-info text-white" asp-action="Details" asp-route-id="@item.Id"> Detayları</a></p>
+     <a class="fas fa-align-justify d-inline p-2 bg-warning text-white" asp-action="KategorileriniAyarla" asp-route-id="@item.Id"> Kategorileri</a>
+    </div>
+  </div>
+  }
+ 

@@ -1,0 +1,150 @@
+@model Kategori
+
+@{
+    ViewData["Title"] = "Sil";
+}
+
+<div class="alert alert-danger row align-items-center p-4" role="alert">
+    <h1>
+        <i class="fas fa-exclamation-triangle"></i>
+    </h1>
+    &nbsp;&nbsp;&nbsp;
+    <h3>
+  <span class="text-danger font-weight-bold">@Model.KategoriAdi</span> Kategorisi Siliniyor
+    </h3>
+</div>
+
+    <div>
+        <form asp-action="Delete">
+<div class="custom-control custom-checkbox p-5">
+  <input type="checkbox" class="custom-control-input" id="customCheck1" name="cbHaberlerSilinsin">
+  <label class="custom-control-label" for="customCheck1"> Kategori İçindeki<span class="text-danger font-weight-bold"> @Model.Haberleri.Count Adet Haber </span> Silinsin</label>
+</div>
+
+    <div class="ml-5 mb-5">
+        <p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Haberleri Göster
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+        <div class="card card-body">
+                <ul>
+                    @foreach (var item in Model.Haberleri)
+                    {
+                        <li>@item.HaberBaslik</li>
+                    }
+                </ul>
+        </div>
+</div>
+    </div>
+            <input type="hidden" asp-for="Id" />
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#silOnayModal">
+            Sil
+        </button> |
+            <a asp-action="Index">Kategori Listesine Geri Dön</a>
+
+<!-- Modal -->
+<div class="modal fade" id="silOnayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-triangle"></i>Dikkat</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="text-danger font-weight-bold">@Model.KategoriAdi</span> Kategorisini
+                    <span id="haberlerSpan" style="display: none;">Ve İçerisindeki
+                    <span class="text-danger font-weight-bold">@Model.Haberleri.Count Adet Haberi</span></span>    
+                    Silmek İstediğinizden Emin Misiniz?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+        <input type="submit" value="Sil" class="btn btn-danger" />
+      </div>
+    </div>
+  </div>
+</div>
+
+        </form>
+    </div>
+
+
+    @* <div class="alert alert-danger row align-items-center p-4" role="alert">
+        <h2><i class="fas fa-exclamation-triangle"></i></h2> &nbsp;&nbsp;&nbsp;
+        <h5><span class="text-danger">@Model.KategoriAdi</span> Kategorisi Siliniyor!!!</h5>
+    </div>
+
+     <form asp-action="Delete">   
+    <div class="custom-control custom-checkbox p-5">
+        <input type="checkbox" class="custom-control-input" id="customCheck1" name="cbHaberlerSilinsin">
+        <label class="custom-control-label" for="customCheck1">Kategori İçindeki
+        <span class="text-danger">@Model.Haberleri.Count Adet Haber</span> Silinsin</label>
+    </div>
+
+    <div class="ml-5 mb-5">
+        <p>
+            <button class="btn btn-primary btn-sm" type="button" data-toogle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Haberleri Göster
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <ul>
+                    @foreach (var item in Model.Haberleri)
+                    {
+                        <li>@item.HaberBaslik</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+<div>
+    <input type="hidden" asp-for="Id"/>
+    <button type="button" class="btn btn-danger" data-toogle="modal" data-target="#silOnayModal">Sil</button> |
+    <a class="d-inline p-1 bg-primary text-white" asp-action="Index">Kategori Listesine Geri Dön</a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="silOnayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-exclamation-triangle"></i>Dikkat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <span class="text-danger font-weight-bold">@Model.KategoriAdi</span> Kategorisini
+                    <span id="haberlerSpan" style="display: none;">Ve İçerisindeki
+                    <span class="text-danger font-weight-bold">@Model.Haberleri.Count Adet Haberi</span></span>    
+                    Silmek İstediğinizden Emin Misiniz?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                    <input type="submit" value="Sil" class="btn btn-danger"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </form>
+</div> *@
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#customCheck1').on('click',function(){
+            if(this.checked){
+                $('#haberlerSpan').show();
+            }
+            else{
+                $('#haberlerSpan').hide();
+            }
+        });
+    });
+    </script>
+}

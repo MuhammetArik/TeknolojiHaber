@@ -1,0 +1,22 @@
+@model TeknolojiHaber.Models.KullaniciViewModel
+<br><br><br>
+<div class="jumbatron mt-5">
+<h1 class="text-primary">Kullanıcı Ekle</h1>
+<hr>
+
+<div class="row">
+    <div class="col-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Eposta Adresi</label>
+                <input asp-for="Eposta" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Şifre</label>
+                <input asp-for="Sifre" type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-primary">Kullanıcı Ekle</button>
+        </form>
+    </div>
+</div>
+</div>

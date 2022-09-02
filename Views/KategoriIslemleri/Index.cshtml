@@ -1,0 +1,77 @@
+@model IEnumerable<TeknolojiHaber.Models.Kategori>
+
+@{
+    ViewData["Title"] = "Kategori";
+}
+
+
+<h1 class="text-warning">Kategoriler</h1>
+@if (User.IsInRole("Admin"))
+{
+<p>
+    <a class="d-inline p-1 bg-primary text-white" asp-action="Create">Yeni Kategori</a>
+</p>
+}
+
+<div class="card-columns row m-t-md card-align">@foreach (var item in Model) 
+ { 
+  <div class="card col-xs-2 col-md-3 card-align">
+    <div class="card-body cardbody-zoom cardbody">
+      <h5 class="card-title">@item.KategoriAdi</h5>
+      <p class="title">@item.Aciklama</p>
+      @if (User.IsInRole("Admin"))
+                {
+                   <p><a class="fas fa-edit d-inline p-2 bg-success text-white" asp-action="Edit" asp-route-id="@item.Id"> Düzenle</a></p> 
+                }
+                <p><a class="fas fa-info-circle d-inline p-2 bg-info text-white" asp-action="Details" asp-route-id="@item.Id"> Detayları</a> </p> 
+                @if (User.IsInRole("Admin"))
+                {
+                 <p><a class="fas fa-trash-alt d-inline p-2 bg-danger text-white" asp-action="Delete" asp-route-id="@item.Id"> Sil</a> </p> 
+                }        
+                <a class="fas fa-align-justify d-inline p-2 bg-warning text-white" asp-controller="HaberIslemleri" asp-action="KategorininHaberleri" asp-route-id="@item.Id"> Haberleri</a>
+      
+    </div>
+  </div>
+  }
+
+@* <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KategoriAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aciklama)
+            </th>
+            <th>
+                Haber İşlemleri
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KategoriAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aciklama)
+            </td>
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="fas fa-edit d-inline p-2 bg-success text-white" asp-action="Edit" asp-route-id="@item.Id"> Düzenle</a> 
+                }
+                <a class="fas fa-info-circle d-inline p-2 bg-info text-white" asp-action="Details" asp-route-id="@item.Id"> Detayları</a> 
+                @if (User.IsInRole("Admin"))
+                {
+                   <a class="fas fa-trash-alt d-inline p-2 bg-danger text-white" asp-action="Delete" asp-route-id="@item.Id"> Sil</a> 
+                }
+                
+                <a class="fas fa-align-justify d-inline p-2 bg-warning text-white" asp-controller="HaberIslemleri" asp-action="KategorininHaberleri" asp-route-id="@item.Id"> Haberleri</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table> *@

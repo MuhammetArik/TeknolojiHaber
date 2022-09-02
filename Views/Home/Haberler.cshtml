@@ -1,0 +1,15 @@
+﻿@model TeknolojiHaber.Models.Haber
+@{
+    ViewData["Title"] = "Haberler";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>@ViewBag.Haberler</p>
+
+@foreach (var item in Model.Resimler){
+<div class="card col-xs-2 col-md-2">
+    <img class="img-fluid" src="\resimler\@item.DosyaAdi"  style="height: 175; widht: 150; margin-top: 25px; center " alt="" />
+    <div class="card-body">
+    </div>
+  </div>
+}

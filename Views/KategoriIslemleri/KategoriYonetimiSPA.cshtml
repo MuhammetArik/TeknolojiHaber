@@ -1,0 +1,51 @@
+<div id="app">
+
+    
+    <div class="jumbotron mt-5"><input placeholder="Kategori Adı" v-model="yeniKategori"> 
+    <button class="btn btn-primary ml-3" v-on:click="yeniKategoriEkle">Ekle</button>
+    <br/><br/>
+    <hr>
+        <h5 class="text-primary">Tüm Kategoriler</h5>
+        <table class="table table-hover mt-3">
+            <thead>
+                <th>Kategori</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr v-for="k in kategoriler" :class="{'table-warning':duzenlenenKategori==k, 'table-danger':silinenKategori==k}">
+                    <td class="w-50">
+                        <input v-if="k==duzenlenenKategori" v-model="duzenlenenKategori.kategoriAdi"/>
+                        <span v-else>{{k.kategoriAdi}}</span>
+                    </td>
+                    <td>
+                        <div v-if="duzenlenenKategori == k">
+                            <span>Emin misiniz?</span>
+                            <button class="btn btn-secondary btn-sm ml-3" v-on:click="duzenlenenKategori=null">İptal</button>
+                            <button class="btn btn-danger btn-sm ml-3" v-on:click="duzenle(duzenlenenKategori)">Değişiklikleri Kaydet</button>
+                        </div>
+                        <div v-else-if="silinenKategori == k">
+                            <span>Emin misiniz?</span>
+                            <button class="btn btn-secondary btn-sm ml-3" v-on:click="silinenKategori=null">İptal</button>
+                            <button class="btn btn-danger btn-sm ml-3" v-on:click="sil(k)">Kalıcı Olarak Sil</button>
+                        </div>
+                        <div v-else>
+                            <button class="btn btn-secondary btn-sm ml-3" v-on:click="duzenlenenKategori=k">Düzenle</button>
+                            <button class="btn btn-danger btn-sm ml-3" v-on:click="silinenKategori=k">Sil</button>
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="~/js/kategoriYonetimi.js"></script>
+}

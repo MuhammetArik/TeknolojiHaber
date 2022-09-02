@@ -1,0 +1,40 @@
+@model TeknolojiHaber.Models.Haber
+
+@{
+    ViewData["Title"] = "Sil";
+}
+
+<br><br>
+<h1 class="fas fa-trash-alt d-inline p-1 bg-danger text-white"> Sil</h1>
+
+<h3>Silmek İstediğinize Emin misiniz?</h3>
+<div>
+    <h4>Haber</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HaberBaslik)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HaberBaslik)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HaberBilgi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HaberBilgi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HaberTarih)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HaberTarih)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> <hr>
+        <a class="d-inline p-1 bg-primary text-white" asp-action="Index">Listeye Geri Dön</a>
+    </form>
+</div>

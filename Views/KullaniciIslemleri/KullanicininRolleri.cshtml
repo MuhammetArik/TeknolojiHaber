@@ -1,0 +1,56 @@
+@model List<string>
+
+@using Microsoft.AspNetCore.Identity
+@inject RoleManager<AppRole> RoleManager
+
+
+<div class="jumbotron mt-3">
+    <span class="text-danger font-weight-bold">@ViewBag.KullaniciAdi</span> Kullanıcısı İçin Rol Seçiniz
+    <hr>
+    
+ 
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="select_all">
+            <label class="custom-control-label" for="select_all">Hepsini Seç</label>
+        </div>
+        <form asp-action="KullanicininRolleri" class="mt-4 ml-3">
+            @foreach (var item in RoleManager.Roles)
+            {
+                var secili = Model.Contains(item.Name) ? "checked" : "";
+        
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input checkbox" id="cb_@item.Id" @secili name="SeciliRoller" value="@item.Name">
+                    <label class="custom-control-label" for="cb_@item.Id">@item.Name</label>
+                </div>
+            }
+            <button class="btn btn-primary mt-3" type="submit"  value="Kaydet">Kaydet</button>
+            <hr>
+            <a class="d-inline p-2 bg-primary text-white" asp-action="Index" class="btn btn-primary">Geri</a>
+        </form>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#select_all').on('click',function(){
+                if(this.checked){
+                    $('.checkbox').each(function(){
+                        this.checked = true;
+                    });
+                }else{
+                    $('.checkbox').each(function(){
+                        this.checked = false;
+                    });
+                }
+            });
+            
+            $('.checkbox').on('click',function(){
+                if($('.checkbox:checked').length == $('.checkbox').length){
+                    $('#select_all').prop('checked',true);
+                }else{
+                    $('#select_all').prop('checked',false);
+                }
+            });
+        });
+    </script>
+}

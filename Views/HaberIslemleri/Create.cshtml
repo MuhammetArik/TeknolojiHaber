@@ -1,0 +1,68 @@
+@model TeknolojiHaber.Models.Haber
+
+@{
+    ViewData["Title"] = "Haber_Olustur";
+}
+<br><br>
+<h1>Haber Oluştur</h1>
+@{ var kategori =ViewBag.Kategori as Kategori;}
+<h6 class="text-danger">@(kategori?.KategoriAdi??"Tüm Haberler")</h6>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="HaberBaslik" class="control-label"></label>
+                <input asp-for="HaberBaslik" class="form-control" />
+                <span asp-validation-for="HaberBaslik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HaberBilgi" class="control-label"></label>
+                <input asp-for="HaberBilgi" class="form-control" />
+                <span asp-validation-for="HaberBilgi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dosyalar" class="control-label" for="ResimSec"></label>
+                <input asp-for="Dosyalar" class="form-control-file" type="file" id="ResimSec" multiple/>
+                <span asp-validation-for="Dosyalar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HaberTarih" class="control-label"></label>
+                <input asp-for="HaberTarih" class="form-control" />
+                <span asp-validation-for="HaberTarih" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IlgiDuzeyi" class="control-label"></label>
+                <input asp-for="IlgiDuzeyi" class="form-control" />
+                <span asp-validation-for="IlgiDuzeyi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Oluştur" class="fas fa-trash-alt d-inline p-2 bg-danger text-white" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="d-inline p-1 bg-primary text-white" asp-action="Index">Listeye Geri Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#IssueDate').datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true
+        });
+    });
+</script>
+}

@@ -1,0 +1,90 @@
+@model TeknolojiHaber.Models.Haber
+
+@{
+    ViewData["Title"] = "Düzenle";
+}
+
+<br><br>
+<h1>Düzenle</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="HaberBaslik" class="control-label"></label>
+                <input asp-for="HaberBaslik" class="form-control" />
+                <span asp-validation-for="HaberBaslik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HaberBilgi" class="control-label"></label>
+                <input asp-for="HaberBilgi" class="form-control" />
+                <span asp-validation-for="HaberBilgi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HaberTarih" class="control-label"></label>
+                <input asp-for="HaberTarih" class="form-control" />
+                <span asp-validation-for="HaberTarih" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IlgiDuzeyi" class="control-label"></label>
+                <input asp-for="IlgiDuzeyi" class="form-control" />
+                <span asp-validation-for="IlgiDuzeyi" class="text-danger"></span>
+            </div>
+                <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+                    </form> <hr />
+            <div> 
+            <form asp-action="ResimEkle" enctype="multipart/form-data" class="mt5" >
+            <div class="card-columns row m-t-md">
+                @foreach (var item in Model.Resimler)
+                {
+                   <div class="card col-xs-2 col-md-2">
+                        <img src="\resimler\@item.DosyaAdi" style="height: 175; widht: 150; margin-top: 25px; center " class="img-fluid"><br>
+                     <div class="card-body">
+                    <a class="fas fa-trash-alt d-inline p-1 bg-danger text-white" asp-action="ResimSil" asp-route-id="@item.Id"> Sil</a>
+                    </div>
+                    </div>
+                }
+            </div>
+            
+            <input type="hidden" asp-for="Id"/>
+            <div class="form-group">
+                <input asp-for="Dosyalar" type="file" multiple class="form-control-file"/>
+                <span asp-validation-for="Dosyalar" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Seçili Resimleri Ekle" class="btn btn-primary"/>
+            </div>
+           </form>
+           </div>
+
+    </div>
+</div>
+<hr>
+<div>
+    <a class="d-inline p-2 bg-primary text-white" asp-action="Index">Listeye Geri Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#HaberTarih').datepicker({
+            dateFormat: "dd/mm/yyyy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true
+        });
+    });
+</script>
